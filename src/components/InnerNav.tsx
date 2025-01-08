@@ -1,57 +1,53 @@
 import styled from "@emotion/styled"
-import Button from '@mui/material/Button';
+import { CreateTaskModal } from "./CreateTaskModal";
+import { useState } from "react";
 
 export default function InnerNav() {
+    const [showCreateTaskModal, setShowCreateTaskModal] = useState(false);
     return (
         <InnerNavWrapper>
-            <div>
-                {/* ain't working */}
-                <Button variant="contained" color="success">
-                    ADD NEW TASK
-                </Button>
-
-            </div>
-            <div>
-                <button>DROP TO REMOVE </button>
+            <div className="addNewTaskZone" onClick={
+                () => {
+                    setShowCreateTaskModal(true);
+                }
+            }>ADD NEW TASK</div>
 
 
-            </div>
+            {showCreateTaskModal && <CreateTaskModal closeModal={() => {
+                setShowCreateTaskModal(false);
+
+
+            }} />}
+
+
         </InnerNavWrapper>
     )
 }
 
 const InnerNavWrapper = styled.div`
-text-align: center;
+align-items: center;
 display: flex;
 flex-direction: row;
-justify-content: flex-start;
-align-items: center;
-gap: 50px;
+justify-content: center;
 background-color: transparent;
-height: 5vh;
+/* height: 5vh; */
 width: 100vw;
 margin: 0px;
 border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-padding-bottom: 10px;
 
-button {
-    height: 40px;
-    margin-bottom: 5px;
-    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 5%, rgba(0,0,0,0.5) 5%, rgba(255,255,255,0.5) 95%, rgba(255,255,255,1) 95%, rgba(255,255,255,1) 100%);
-    border: none;
-    border-radius: 8px;
+.addNewTaskZone{
+    height: 50px;
+    width: 200px;
+    border: 1px solid transparent;
+    background: linear-gradient(180deg, rgba(0,255,0,0.5) 0%, rgba(0,255,0,0.5) 5%, rgba(0,255,0,0.5) 5%, rgba(0,255,0,0.5) 95%, rgba(0,255,0,0.5) 95%, rgba(0,255,0,0.5) 100%);
+    border-radius: 3px;
     color: white;
     padding: 10px 20px;
     font-size: 14px;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
 }
-
-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
-}
-
 `

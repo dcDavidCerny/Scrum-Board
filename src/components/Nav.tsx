@@ -10,7 +10,7 @@ export default function Nav() {
             </div>
             <div>
 
-                <Link to="/">CENTER</Link>
+                <Link to="/">BOARD</Link>
             </div>
             <div>
 
