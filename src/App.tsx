@@ -8,6 +8,8 @@ import TaskColumnWrapper from "./components/TaskColumnWrapper";
 import { Task } from "./components/localStorage";
 import { useEffect, useState } from "react";
 import ShowTask from "./components/ShowTask";
+import { SignupComponent } from "./components/SignUp";
+import { AboutComponent } from "./components/About";
 
 export default function App() {
   const [draggedTask, setDraggedTask] = useState<null | Task>(null);
@@ -61,6 +63,9 @@ export default function App() {
 
           <Route path="/task/:id" element={<ShowTask></ShowTask>} />
 
+          <Route path="/about" element={<AboutComponent />} />
+
+          <Route path="/signup" element={<SignupComponent />} />
           {/* pro vše ostatní kromě toho co bylo definované nahoře nad touto poslední routhe path */}
           <Route path="*" element={<div> 404: not found </div>} />
         </Routes>
@@ -78,18 +83,11 @@ const AppWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 1) 0%,
-      rgba(255, 255, 255, 1) 5%,
-      rgba(255, 255, 255, 0.5) 5%,
-      rgba(0, 0, 0, 0.5) 95%,
-      rgba(0, 0, 0, 1) 95%,
-      rgba(0, 0, 0, 1) 100%
-    );
+    background: var(--white);
   }
 
   .content {
+    color: var(--black);
     display: flex;
     flex-direction: column;
     justify-content: space-between;

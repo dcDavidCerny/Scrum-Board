@@ -38,7 +38,7 @@ export const editTask = ({
     title,
     description,
     storyPoint,
-    status
+    status,
 }: Task
 ) => {
     const tasks = getTasks();

@@ -20,6 +20,13 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+
+  --red: #F93943;
+  --green: #21E877;
+  --blue: #313E50;
+  --white: #ffecd1;
+  --black: #313E50;
+  --blackLighter: rgba(49, 62, 80, 0.3);
 }
 
 

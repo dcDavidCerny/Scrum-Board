@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { useParams } from "react-router";
 import { getTaskByID, editTask } from "./localStorage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface TaskProps {}
 
@@ -10,10 +10,15 @@ export default function ShowTask({}: TaskProps) {
 
   const { id } = useParams<{ id: string }>();
   const task = getTaskByID(id!);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [selectedstoryPoint, setSelectedStoryPoint] = useState<null | number>(null);
 
-  const title = task?.title;
-  const description = task?.description;
-  const storyPoints = task?.storyPoint;
+  useEffect(() => {
+    setTitle(task?.title || "");
+    setDescription(task?.description || "");
+    setSelectedStoryPoint(task?.storyPoint || null);
+  }, [task?.title, task?.description, task?.storyPoint]);
 
   if (!task) {
     return <h1>Task not found</h1>;
@@ -24,9 +29,9 @@ export default function ShowTask({}: TaskProps) {
       ...task,
       title,
       description,
-      storyPoint: storyPoints,
+      storyPoint: selectedstoryPoint || 0,
     };
-    editTask(id!, updatedTask);
+    editTask(updatedTask);
     setisEditting(false);
   };
 
@@ -37,14 +42,14 @@ export default function ShowTask({}: TaskProps) {
           <>
             <h1>
               Task:{" "}
-              <input type="text" className="inputH1" defaultValue={title} onChange={(e) => (title = e.target.value)} />
+              <input type="text" className="inputH1" defaultValue={title} onChange={(e) => setTitle(e.target.value)} />
             </h1>
             <div>
               <h2>Description:</h2>
               <textarea
                 className="pDescription"
                 defaultValue={description}
-                onChange={(e) => (description = e.target.value)}
+                onChange={(e) => setDescription(e.target.value)}
               />
             </div>
             <div>
@@ -53,8 +58,8 @@ export default function ShowTask({}: TaskProps) {
                 <input
                   type="number"
                   className="blueSpan"
-                  defaultValue={storyPoints}
-                  onChange={(e) => (storyPoints = Number(e.target.value))}
+                  defaultValue={selectedstoryPoint!}
+                  onChange={(e) => setSelectedStoryPoint(Number(e.target.value))}
                 />
               </span>
             </div>
@@ -72,7 +77,7 @@ export default function ShowTask({}: TaskProps) {
             </div>
             <div>
               <span className="spanStoryPoints">
-                Story Points: <span className="blueSpan">{storyPoints}</span>
+                Story Points: <span className="blueSpan">{selectedstoryPoint}</span>
               </span>
             </div>
             <br />
@@ -102,10 +107,13 @@ const ShowTaskWrapper = styled.div`
   background-color: #555555;
   h1 {
     font-size: 40px;
+    display: flex;
+    flex-direction: row;
   }
   .inputH1 {
     font-size: 40px;
     width: 100%;
+    margin-left: 10px;
   }
   h2 {
     font-size: 30px;
@@ -120,12 +128,12 @@ const ShowTaskWrapper = styled.div`
   .pDescription {
     white-space: pre-line;
     overflow: auto;
-    height: 450px;
+    height: 400px;
+    width: 1000px;
   }
 
   textarea {
     width: 100%;
-    height: 200px;
     font-size: 20px;
   }
   .spanStoryPoints {
@@ -135,10 +143,21 @@ const ShowTaskWrapper = styled.div`
   }
 
   .editBtn {
-    margin-top: 20px;
-    padding: 10px 20px;
+    margin-top: 10px;
+    padding: 8px 20px;
     font-size: 20px;
     background-color: #00d9ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .saveBtn {
+    margin-top: 10px;
+    padding: 8px 20px;
+    font-size: 20px;
+    background-color: #06e90d;
     color: white;
     border: none;
     border-radius: 5px;

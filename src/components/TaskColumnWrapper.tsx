@@ -27,9 +27,9 @@ export default function TaskColumnWrapper({ title, status, draggedTask, setDragg
   return (
     <TaskColumnWrapperWrapper>
       <div>
-        <h1 className={`title-${status}`}>{title}:</h1>
-      </div>
-      <div>
+        <div>
+          <h1 className={`title-${status}`}>{title}:</h1>
+        </div>
         <ul
           className={draggedTask ? "draggedUl" : ""}
           onDrop={(e) => {
@@ -63,19 +63,20 @@ export default function TaskColumnWrapper({ title, status, draggedTask, setDragg
 
 const TaskColumnWrapperWrapper = styled.div`
   width: 500px;
+  height: 100%;
   h1 {
     text-align: center;
   }
   h1.title-todo {
-    color: #ff8800;
+    color: var(--black);
   }
 
   h1.title-inProgress {
-    color: yellow;
+    color: var(--black);
   }
 
   h1.title-done {
-    color: green;
+    color: var(--black);
   }
   ul {
     list-style: none;
@@ -84,22 +85,26 @@ const TaskColumnWrapperWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100%;
+    justify-content: start;
+    height: 500px;
     width: 100%;
+    overflow: auto;
+    overflow-x: hidden;
     padding: 20px;
-    border: 1px solid transparent;
     gap: 5px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #ffffff;
   }
 
   .dropLi {
-    background-color: rgba(255, 255, 255, 0.01);
-    border: 1px dotted rgba(255, 255, 255, 0.5);
     cursor: default;
+    text-align: center;
+    flex-grow: 1;
+    align-content: center;
   }
 
-  li {
+  li:not(.dropLi) {
+    border: 1px solid var(--blackLighter);
+    color: black;
     background-color: rgba(255, 255, 255, 0.1);
     width: 100%;
     padding: 10px;
@@ -116,7 +121,7 @@ const TaskColumnWrapperWrapper = styled.div`
 
   a {
     cursor: pointer;
-    color: white !important;
+    color: var(--black) !important;
 
     text-decoration: none;
   }
@@ -133,14 +138,9 @@ const TaskColumnWrapperWrapper = styled.div`
     border: 1px dotted #ffa500;
   }
 
-  li:hover {
+  li:hover:not(.dropLi) {
     transform: scale(1.01);
     box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
     background-color: rgba(255, 255, 255, 0.2);
-  }
-
-  .dropLi:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-    transform: scale(1);
   }
 `;

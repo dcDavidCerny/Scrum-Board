@@ -67,8 +67,12 @@ export const CreateTaskModal = ({ closeModal }: Props) => {
           />
         </div>
         <div className="buttonsDiv">
-          <button onClick={handleAddTask}>Add the Task</button>
-          <button onClick={closeModal}>Cancel</button>
+          <button className="btnAdd" onClick={handleAddTask}>
+            Add the Task
+          </button>
+          <button className="btnCancel" onClick={closeModal}>
+            Cancel
+          </button>
         </div>
       </CreateTaskModalWrapper>
     </Modal>
@@ -109,20 +113,26 @@ const CreateTaskModalWrapper = styled.div`
   }
 
   .inputTitle {
+    background-color: var(--blue);
     margin: 20px;
     padding: 20px 20px;
     font-size: large;
     font-weight: 600;
     width: 100%;
+    border: none;
+    outline: none;
   }
 
   .inputDescription {
+    background-color: var(--blue);
     margin: 20px;
     padding: 20px 20px;
     font-size: large;
     font-weight: 600;
     width: 100%;
     height: 20vh;
+    border: none;
+    outline: none;
   }
 
   .storyPointsContainer {
@@ -137,15 +147,26 @@ const CreateTaskModalWrapper = styled.div`
   }
 
   .storyPointBtn {
-    color: black;
+    font-weight: bold;
+    color: white;
     padding: 10px;
-    background-color: #2e475d;
+    background-color: var(--blue);
     border-radius: 5px;
     width: 30px;
     cursor: pointer;
   }
 
   .storyPointBtn.selected {
-    background-color: red;
+    background-color: var(--green);
+  }
+
+  .btnAdd {
+    font-weight: bold;
+    background-color: var(--green);
+  }
+
+  .btnCancel {
+    font-weight: bold;
+    background-color: var(--red);
   }
 `;
