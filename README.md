@@ -4,7 +4,7 @@ Welcome to my Scrum-Board project! This application showcases my skills in build
 
 🚀 Live Demo
 
-Experience the Scrum-Board here: Live Demo (Insert link to your project here)
+Experience the Scrum-Board here: [Live Demo](https://dcdavidcerny.github.io/Scrum-Board/)
 
 ✨ Key Features
 
